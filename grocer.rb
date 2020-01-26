@@ -53,8 +53,8 @@ def apply_coupons(cart, coupons)
           cart << couponed_item
           cart[cart_index][:count] = remainder
         end
+        coupons_index += 1
       end
-      coupons_index += 1
     end
     cart_index += 1
   end
