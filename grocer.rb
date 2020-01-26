@@ -47,7 +47,7 @@ def apply_coupons(cart, coupons)
         remainder = cart_item[:count] % coupon_item[:num]
         coupon_cart = cart[cart_index]
         coupon_cart[:item] = "#{cart[cart_index][:item]} W/COUPON"
-        coupon_cart[:price] = coupon_item[:price] / coupon_item[:num]
+        coupon_cart[:price] = coupon_item[:cost] / coupon_item[:num]
         coupon_cart[:count] = cart[cart_index][:count] - remainder
         cart << coupon_cart
         cart[cart_index][:count] = remainder
