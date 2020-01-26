@@ -39,21 +39,21 @@ def apply_coupons(cart, coupons)
   # REMEMBER: This method **should** update cart
   cart_index = 0
   while cart_index < cart.length do
-    coupons_index = 0
-    while coupons_index < coupons.length do
-      cart_item = 
-      coupon_item = 
-      if cart[cart_index][:item] == coupons[coupons_index][:item] && cart[cart_index][:count] > coupons[coupons_index][:num]
-        remainder = cart[cart_index][:count] % coupons[coupons_index][:num]
-        coupon_cart = {}
-        coupon_cart[:item] = "#{cart[cart_index][:item]} W/COUPON"
-        coupon_cart[:price] = coupons[coupons_index][:cost] / coupons[coupons_index][:num]
-        coupon_cart[:count] = cart[cart_index][:count] - remainder
-        coupon_cart[:clearance] = cart[cart_index][:clearance]
-        cart << coupon_cart
-        cart[cart_index][:count] = remainder
+    if cart[cart_index][:clearance] == true
+      coupons_index = 0
+      while coupons_index < coupons.length do
+        if cart[cart_index][:item] == coupons[coupons_index][:item] && cart[cart_index][:count] > coupons[coupons_index][:num]
+          remainder = cart[cart_index][:count] % coupons[coupons_index][:num]
+          coupon_cart = {}
+          coupon_cart[:item] = "#{cart[cart_index][:item]} W/COUPON"
+          coupon_cart[:price] = coupons[coupons_index][:cost] / coupons[coupons_index][:num]
+          coupon_cart[:count] = cart[cart_index][:count] - remainder
+          coupon_cart[:clearance] = cart[cart_index][:clearance]
+          cart << coupon_cart
+          cart[cart_index][:count] = remainder
+        end
+        coupons_index += 1
       end
-      coupons_index += 1
     end
     cart_index += 1
   end
